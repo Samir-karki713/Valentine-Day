@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aakriti (My Sanu) 💖 - Will You Be My Valentine?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary-pink: #ff4d94;
+            --light-pink: #ff99c8;
+            --soft-pink: #ffe6f2;
+            --white: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --transition: all 0.4s ease;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffe6f2 0%, #ffb3d9 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #5a2d42;
+            position: relative;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Floating Hearts Background */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: var(--primary-pink);
+            opacity: 0.3;
+            font-size: 20px;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            z-index: 2;
+            position: relative;
+        }
+
+        /* Proposal Screen */
+        #proposal-screen {
+            text-align: center;
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--primary-pink);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: #7a3b5a;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            min-height: 100px;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 3;
+        }
+
+        .btn-yes {
+            background: var(--primary-pink);
+            color: white;
+        }
+
+        .btn-yes:hover {
+            background: #ff3380;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 77, 148, 0.3);
+        }
+
+        .btn-no {
+            background: #e6e6e6;
+            color: #666;
+            position: relative;
+        }
+
+        .btn-no:hover {
+            background: #d9d9d9;
+        }
+
+        /* FIXED: NO button movement container */
+        .no-button-container {
+            position: relative;
+            width: 150px;
+            height: 70px;
+            display: inline-block;
+        }
+
+        /* Date Input Screen */
+        #date-screen {
+            text-align: center;
+            display: none;
+        }
+
+        .date-input {
+            margin: 30px 0;
+        }
+
+        .date-input label {
+            display: block;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #7a3b5a;
+        }
+
+        .date-input input {
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            border-radius: 12px;
+            border: 2px solid var(--light-pink);
+            width: 250px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .date-input input:focus {
+            outline: none;
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 0 3px rgba(255, 77, 148, 0.2);
+        }
+
+        .btn-submit {
+            background: var(--primary-pink);
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background: #ff3380;
+            transform: scale(1.05);
+        }
+
+        .error-message {
+            color: #ff3333;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .crying-emoji {
+            font-size: 3rem;
+            animation: crying 1.5s infinite;
+            display: none;
+            margin-top: 10px;
+        }
+
+        @keyframes crying {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Main Website */
+        #main-website {
+            display: none;
+            width: 100%;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: var(--primary-pink);
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #7a3b5a;
+        }
+
+        /* Navigation */
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--primary-pink);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            background: var(--primary-pink);
+            color: white;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: var(--primary-pink);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            animation: slideIn 0.8s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary-pink);
+            margin-bottom: 5px;
+        }
+
+        .timeline-text {
+            color: #5a2d42;
+        }
+
+        /* Apology Letter */
+        .letter-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            min-height: 400px;
+        }
+
+        .letter-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #5a2d42;
+        }
+
+        .letter-salutation {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: var(--primary-pink);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid var(--primary-pink);
+            white-space: pre-wrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: var(--primary-pink)
+            }
+        }
+
+        /* Memories Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            height: 250px;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Final Promise */
+        .promise-container {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .promise-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: var(--primary-pink);
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .heart-shower {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            display: none;
+        }
+
+        .shower-heart {
+            position: absolute;
+            color: var(--primary-pink);
+            font-size: 24px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Shake Animation */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.4rem;
+            }
+
+            .btn {
+                padding: 15px 30px;
+                font-size: 1.3rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .no-button-container {
+                width: 100%;
+                height: 70px;
+                margin-top: 10px;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .promise-text {
+                font-size: 2.2rem;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .buttons {
+                gap: 15px;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1.2rem;
+            }
+
+            .promise-text {
+                font-size: 1.8rem;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts" id="floating-hearts"></div>
+
+    <!-- Proposal Screen -->
+    <div class="container" id="proposal-screen">
+        <div class="glass-card">
+            <h1 class="title">Aakriti (My Sanu) 💖</h1>
+            <p class="subtitle">Will you be my Valentine?</p>
+
+            <div class="buttons">
+                <button class="btn btn-yes" id="yes-btn">
+                    <i class="fas fa-heart"></i> YES ❤️
+                </button>
+                <div class="no-button-container" id="no-button-container">
+                    <button class="btn btn-no" id="no-btn">
+                        <i class="fas fa-times"></i> NO 💔
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Date Input Screen -->
+    <div class="container" id="date-screen">
+        <div class="glass-card">
+            <h2 class="title">Our Love Story 💘</h2>
+            <p class="subtitle">Do you love me ? then prove, When did our love story begin?</p>
+
+            <div class="date-input">
+                <label for="love-date">Enter the date</label>
+                <input type="text" id="love-date" placeholder="YYYY/MM/DD">
+                <button class="btn-submit" id="submit-date">Submit Date</button>
+            </div>
+
+            <div class="error-message" id="error-message">You don't love me 😭</div>
+            <div class="crying-emoji" id="crying-emoji">😭</div>
+        </div>
+    </div>
+
+    <!-- Main Website -->
+    <div class="container" id="main-website">
+        <div class="glass-card">
+            <!-- Navigation -->
+            <div class="nav-container">
+                <button class="nav-btn active" data-page="timeline">
+                    <i class="fas fa-history"></i> Our Timeline
+                </button>
+                <button class="nav-btn" data-page="letter">
+                    <i class="fas fa-envelope"></i> Love Letter
+                </button>
+                <button class="nav-btn" data-page="promise">
+                    <i class="fas fa-gem"></i> Forever Promise
+                </button>
+            </div>
+
+            <!-- Timeline Page -->
+            <div class="page active" id="timeline-page">
+                <div class="page-header">
+                    <h2 class="page-title">Our Love Timeline</h2>
+                    <p class="page-subtitle">The beautiful journey of us</p>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">The Beginning</div>
+                            <div class="timeline-text">We met and my world changed forever. Your smile lit up my life in
+                                ways I never imagined possible.</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">First Talks</div>
+                            <div class="timeline-text">Our first conversations felt like we had known each other
+                                forever. The connection was instant and magical.</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">01 August 2023</div>
+                            <div class="timeline-text">We became us ❤️. This day marked the beginning of our beautiful
+                                love story, a day I'll cherish forever.</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Today</div>
+                            <div class="timeline-text">My love for you grows stronger every day. You are my greatest
+                                blessing and my forever Valentine.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Love Letter Page -->
+            <div class="page" id="letter-page">
+                <div class="page-header">
+                    <h2 class="page-title">My Heart's Apology</h2>
+                    <p class="page-subtitle">Words from my soul to yours</p>
+                </div>
+
+                <div class="letter-container">
+                    <div class="letter-salutation">My Aakriti… my Sanu 💖</div>
+                    <div class="letter-content typewriter" id="letter-content">
+                        My dearest Aakriti,
+
+                        From the moment you entered my life, everything changed. Your laughter became my favorite
+                        melody, your smile my daily sunshine, and your love my greatest strength.
+
+                        I apologize for all the times I may have fallen short, for the moments I didn't express how
+                        incredibly grateful I am to have you. You deserve the world and more, and I promise to spend my
+                        life trying to give it to you.
+
+                        You are my sanctuary, my peace in chaos, my hope in darkness. With you, I've discovered a love
+                        so pure it feels like a dream I never want to wake from.
+
+                        I promise to cherish you every single day, to support your dreams as my own, to be your safe
+                        haven in this unpredictable world. I promise to love you more with each passing sunrise, to hold
+                        your hand through every storm, and to build a future filled with laughter, adventure, and
+                        unwavering devotion.
+
+                        You are my forever, my always, my everything.
+
+                        With all my love,
+                        Forever Yours
+                        Samir
+                    </div>
+                </div>
+            </div>
+
+            <!-- Memories Gallery -->
+
+            <!-- Final Promise -->
+            <div class="page" id="promise-page">
+                <div class="promise-container">
+                    <h2 class="promise-text">👉 Forever Starts With You, Sanu 💍</h2>
+                    <button class="btn btn-yes" id="final-valentine-btn" style="font-size: 1.8rem; padding: 20px 50px;">
+                        <i class="fas fa-heart"></i> Be My Valentine ❤️
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Heart Shower Animation -->
+    <div class="heart-shower" id="heart-shower"></div>
+
+    <script>
+        // DOM Elements
+        const proposalScreen = document.getElementById('proposal-screen');
+        const dateScreen = document.getElementById('date-screen');
+        const mainWebsite = document.getElementById('main-website');
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const noButtonContainer = document.getElementById('no-button-container');
+        const loveDateInput = document.getElementById('love-date');
+        const submitDateBtn = document.getElementById('submit-date');
+        const errorMessage = document.getElementById('error-message');
+        const cryingEmoji = document.getElementById('crying-emoji');
+        const navBtns = document.querySelectorAll('.nav-btn');
+        const pages = document.querySelectorAll('.page');
+        const finalValentineBtn = document.getElementById('final-valentine-btn');
+        const floatingHearts = document.getElementById('floating-hearts');
+        const heartShower = document.getElementById('heart-shower');
+        const letterContent = document.getElementById('letter-content');
+
+        // Correct date (YYYY/MM/DD)
+        const CORRECT_DATE = "2023/08/01";
+
+        // Variables for NO button movement
+        let isMoving = false;
+        let moveInterval;
+        let moveDirections = ['up', 'down', 'left', 'right'];
+        let currentDirection = '';
+        let moveSpeed = 3; // pixels per movement
+
+        // Initialize floating hearts
+        function createFloatingHearts() {
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.top = `${Math.random() * 100}%`;
+                heart.style.animationDelay = `${Math.random() * 5}s`;
+                heart.style.fontSize = `${Math.random() * 15 + 15}px`;
+                floatingHearts.appendChild(heart);
+            }
+        }
+
+        // FIXED: NO Button Movement Logic - Smooth and stays in viewport
+        // NEW: Smart escape from pointer
+        function runAwayFromPointer(e) {
+            const btn = noBtn;
+            const card = document.querySelector('.glass-card');
+
+            const btnRect = btn.getBoundingClientRect();
+            const cardRect = card.getBoundingClientRect();
+
+            const pointerX = e.type.includes("touch")
+                ? e.touches[0].clientX
+                : e.clientX;
+            const pointerY = e.type.includes("touch")
+                ? e.touches[0].clientY
+                : e.clientY;
+
+            const btnCenterX = btnRect.left + btnRect.width / 2;
+            const btnCenterY = btnRect.top + btnRect.height / 2;
+
+            const distance = Math.hypot(
+                pointerX - btnCenterX,
+                pointerY - btnCenterY
+            );
+
+            // Trigger only when close
+            if (distance > 80) return;
+
+            const padding = 20;
+
+            const minX = cardRect.left + padding;
+            const maxX = cardRect.right - btnRect.width - padding;
+            const minY = cardRect.top + padding;
+            const maxY = cardRect.bottom - btnRect.height - padding;
+
+            let newLeft, newTop;
+
+            // Keep generating until position is FAR from pointer
+            do {
+                newLeft = minX + Math.random() * (maxX - minX);
+                newTop = minY + Math.random() * (maxY - minY);
+            } while (Math.hypot(pointerX - newLeft, pointerY - newTop) < 200);
+
+            btn.style.position = "fixed";
+            btn.style.left = `${newLeft}px`;
+            btn.style.top = `${newTop}px`;
+            btn.style.transition = "all 0.18s ease-out";
+            btn.style.zIndex = "99999";
+        }
+
+        function activateNoButton() {
+            noBtn.addEventListener("mouseenter", runAwayFromPointer);
+            noBtn.addEventListener("mousemove", runAwayFromPointer);
+            noBtn.addEventListener("touchstart", runAwayFromPointer, { passive: false });
+        }
+
+        activateNoButton();
+
+        // YES Button Click Handler
+        yesBtn.addEventListener('click', function() {
+            proposalScreen.style.display = 'none';
+            dateScreen.style.display = 'flex';
+        });
+
+        // Date Validation
+        submitDateBtn.addEventListener('click', function() {
+            const enteredDate = loveDateInput.value.trim();
+
+            if (enteredDate === CORRECT_DATE) {
+                // Correct date - show main website
+                dateScreen.style.display = 'none';
+                mainWebsite.style.display = 'flex';
+
+                // Start typewriter effect for the letter
+                startTypewriterEffect();
+            } else {
+                // Wrong date - show error
+                errorMessage.style.display = 'block';
+                cryingEmoji.style.display = 'block';
+
+                // Shake animation for input
+                loveDateInput.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    loveDateInput.style.animation = '';
+                }, 500);
+
+                // Clear input
+                loveDateInput.value = '';
+
+                // Hide error after 3 seconds
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                    cryingEmoji.style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        // Enter key for date submission
+        loveDateInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitDateBtn.click();
+            }
+        });
+
+        // Navigation between pages
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const pageId = this.getAttribute('data-page');
+
+                // Update active nav button
+                navBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                // Show selected page
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                    if (page.id === `${pageId}-page`) {
+                        page.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Final Valentine Button
+        finalValentineBtn.addEventListener('click', function() {
+            // Create heart shower
+            createHeartShower();
+
+            // Show sweet alert
+            setTimeout(() => {
+                alert("You've made me the happiest person in the world! 💖\n\nI promise to love you, cherish you, and stand by you forever.\n\nHappy Valentine's Day, my love! ❤️");
+            }, 1000);
+        });
+
+        // Create heart shower animation
+        function createHeartShower() {
+            heartShower.style.display = 'block';
+
+            // Create 50 hearts
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'shower-heart';
+                heart.innerHTML = '❤';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.fontSize = `${Math.random() * 20 + 15}px`;
+                heart.style.opacity = Math.random() * 0.5 + 0.5;
+                heart.style.animationDuration = `${Math.random() * 3 + 5}s`;
+                heart.style.animationDelay = `${Math.random() * 2}s`;
+
+                heartShower.appendChild(heart);
+
+                // Remove heart after animation completes
+                setTimeout(() => {
+                    heart.remove();
+                }, 8000);
+            }
+
+            // Hide shower after 8 seconds
+            setTimeout(() => {
+                heartShower.style.display = 'none';
+                // Clear all hearts
+                heartShower.innerHTML = '';
+            }, 8000);
+        }
+
+        // Typewriter effect for the letter
+        function startTypewriterEffect() {
+            const text = letterContent.textContent;
+            letterContent.textContent = '';
+            letterContent.style.borderRight = '2px solid var(--primary-pink)';
+
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    letterContent.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 30);
+                } else {
+                    letterContent.style.borderRight = 'none';
+                }
+            }
+
+            // Start typewriter after a short delay
+            setTimeout(typeWriter, 500);
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            createFloatingHearts();
+        });
+    </script>
+</body>
+
+</html>
